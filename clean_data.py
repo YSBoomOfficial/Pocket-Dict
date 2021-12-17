@@ -6,7 +6,7 @@ en_data = []
 fr_data = []
 data_dict = dict()
 
-def clean_en(text):
+def clean_en(text: str) -> str:
     if ' ' in text:
         text = text.replace(' ', ' ')
 
@@ -25,7 +25,7 @@ def clean_en(text):
     return text
 
 
-def clean_fr(text):
+def clean_fr(text: str) -> str:
     if ' ' in text:
         text = text.replace(' ', ' ')
 
@@ -61,8 +61,8 @@ for row in txt_data:
     en = data[0]
     fr = data[1]
 
-    txt_data_en.append(clean_en(en).lower())
-    txt_data_fr.append(clean_fr(fr).lower())
+    txt_data_en.append(clean_en(en).lower().strip())
+    txt_data_fr.append(clean_fr(fr).lower().strip())
 
 
 csv_data = pd.read_csv("datasets/eng_-french.csv")
@@ -74,10 +74,10 @@ csv_data_en = []
 csv_data_fr = []
 
 for i, en in enumerate(csv_data.English):
-    csv_data_en.append(clean_en(en).lower())
+    csv_data_en.append(clean_en(en).lower().strip())
 
 for i, fr in enumerate(csv_data.French):
-    csv_data_fr.append(clean_fr(fr).lower())
+    csv_data_fr.append(clean_fr(fr).lower().strip())
 
 # combine txt and csv data
 en_data = txt_data_en + csv_data_en
