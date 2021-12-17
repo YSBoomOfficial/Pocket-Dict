@@ -1,10 +1,10 @@
 import pandas as pd
 
 # lists that will contain all the data
+# I removed all data after line 100,000 so that the data doesn't get too big.
 en_data = []
 fr_data = []
 data_dict = dict()
-
 
 def clean_en(text):
     if ' ' in text:
@@ -44,7 +44,7 @@ def clean_fr(text):
     return text
 
 
-with open('eng-french.txt', 'r', encoding='utf-8') as f:
+with open('datasets/eng-french.txt', 'r', encoding='utf-8') as f:
     txt_data = f.read().split('\n')
 
 
@@ -65,7 +65,7 @@ for row in txt_data:
     txt_data_fr.append(clean_fr(fr).lower())
 
 
-csv_data = pd.read_csv("eng_-french.csv")
+csv_data = pd.read_csv("datasets/eng_-french.csv")
 csv_data = csv_data.rename(columns={'English words/sentences': 'English',
                                     'French words/sentences': 'French'})
 
@@ -79,14 +79,12 @@ for i, en in enumerate(csv_data.English):
 for i, fr in enumerate(csv_data.French):
     csv_data_fr.append(clean_fr(fr).lower())
 
+# combine txt and csv data
 en_data = txt_data_en + csv_data_en
 fr_data = txt_data_fr + csv_data_fr
 
-# make sure both lists are the same length
-# assert len(en_data) == len(fr_data) == 325484
-
 # given that there may be many translations for a given english word/phrase, putting the english phrase in a dictionary with a list of translations as it's values is best.
-# Dict access is O(1) so this is a good way to store the data. as supposed to looping over two lists which would be O(n^2)
+# Dict access is O(1) time complexity so this is a better way to store the data in comparison with looping over two lists which would be O(n) time complexity.
 for i in range(0, len(en_data)):
     if en_data[i] in data_dict:
         data_dict[en_data[i]].add(fr_data[i])
