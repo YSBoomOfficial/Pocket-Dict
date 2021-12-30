@@ -4,7 +4,7 @@ import clean_data as cd
 import search as sh
 
 if __name__ == '__main__':
-    os.system("pytest -v ./tests.py")
+    os.system("pytest -v ./_tests.py")
 
 
 def test_list_length():
