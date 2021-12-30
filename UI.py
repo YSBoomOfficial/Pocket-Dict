@@ -29,21 +29,16 @@ center_y = int(screen_height/2 - window_height / 2)
 
 root.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
 
-# create listbox for results and set scrollbar
-scrollbar = ttk.Scrollbar(frame)
-scrollbar.grid(row=3, column=0)
-result_list = tk.Listbox(frame, yscrollcommand=scrollbar.set)
-result_list.grid(row=3, column=0)
-scrollbar.config(command=result_list.yview)
+# create listbox for results
+result_list = tk.Listbox(frame)
 
 # Label to introduce pocket dict
-intro_label= ttk.Label(
+intro_label = ttk.Label(
     frame,
     text="Welcome to Pocket Dict, what would you like me to translate today?",
     font=("Helvetica", 16),
     justify="center"
 )
-intro_label.grid(row=0, column=0, **options)
 
 # Entry field for user input
 field = ttk.Entry(
@@ -51,14 +46,16 @@ field = ttk.Entry(
     justify="left",
     textvariable=field_output
 )
-field.grid(row=1, column=0)
 field.focus()
+
 
 def display_results(results: list[str]):
     for i in range(0, len(results)-1):
         result_list.insert(END, results[i])
 
 # tap handler for search button
+
+
 def search_handler():
     # show error if field is empty
     if field_output.get() == "":
@@ -89,45 +86,55 @@ def search_handler():
         print(data)
         display_results(data)
 
+
 # search button
-btn = ttk.Button(
+search_btn = ttk.Button(
     frame,
     text="Search",
 )
-btn.grid(row=2, column=0, **options)
-btn.configure(command=search_handler)
+search_btn.configure(command=search_handler)
 
 # tap handler for clear button
+
+
 def clear_handler():
     result_list.delete(0, END)
     field_output.set("")
 
+
 # clear button
-btn = ttk.Button(
+clear_btn = ttk.Button(
     frame,
     text="Clear",
 )
-btn.grid(row=2, column=1, **options)
-btn.configure(command=clear_handler)
+clear_btn.configure(command=clear_handler)
 
 # checkbox for fewer translations
-ttk.Checkbutton(
+less_box = ttk.Checkbutton(
     frame,
     text='Show Fewer Translations',
     variable=show_less,
     onvalue=True,
     offvalue=False
-).grid(row=2, column=2, **options)
+)
 
 # checkbox for only nouns
-ttk.Checkbutton(
+noun_box = ttk.Checkbutton(
     frame,
     text='Only Show Nouns',
     variable=only_nouns,
     onvalue=True,
     offvalue=False
-).grid(row=2, column=3, **options)
+)
 
+# pack all the widgets
+intro_label.pack(**options)
+field.pack(**options)
+search_btn.pack(**options)
+clear_btn.pack(**options)
+less_box.pack(**options)
+noun_box.pack(**options)
+result_list.pack(**options)
 # add frame to root
-frame.grid(padx=10, pady=10)
+frame.pack(**options)
 root.mainloop()
