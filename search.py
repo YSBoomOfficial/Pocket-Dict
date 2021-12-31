@@ -42,33 +42,51 @@ def reduce_results(search_string: str, data_list: list[str]) -> list[str]:
 
     return sorted(results, key=len)
 
+##### FILTER NOUN NOT WORKING #####
 # Filter for only nouns
-def get_nouns(data_list: list[str]) -> list[str]:
-    results = []
+# def get_nouns(data_list: list[str]) -> list[str]:
+#     results = []
 
-    for item in data_list:
-        # filter all posible articles which are always followed by nouns
-        if ('le ' in item) or ('la ' in item) or ('les ' in item) or ('l\'' in item) or ('un ' in item) or ('une ' in item) or ('de la ' in item) or ('du ' in item) or ('des ' in item) or ('à la ' in item) or ('au ' in item) or ('aux ' in item):
-            results.append(item)
+#     for item in data_list:
+#         # filter all posible articles which are always followed by nouns
+#         if ('le ' in item) or ('la ' in item) or ('les ' in item) or ('l\'' in item) or ('un ' in item) or ('une ' in item) or ('de la ' in item) or ('du ' in item) or ('des ' in item) or ('à la ' in item) or ('au ' in item) or ('aux ' in item):
+#             results.append(item)
 
-    return results
+#     return results
+
+##### FILTER NOUN NOT WORKING #####
+# get results for search text
+# def get_result(search_text: str, show_less: bool, only_nouns: bool) -> list[str]:
+#     # clean the input string
+#     search_text = clean_input_str(search_text)
+
+#     # find all possible translations
+#     all_results = find_all(search_text)
+
+#     if show_less and only_nouns:
+#         # reduce the scope of the results and filter for nouns
+#        return get_nouns(reduce_results(search_text, all_results))
+#     elif show_less:
+#         # reduce the scope of the results
+#         return reduce_results(search_text, all_results)
+#     elif only_nouns:
+#         # filter all results for nouns
+#         return get_nouns(all_results)
+#     else:
+#         return all_results
 
 
-def get_result(search_text: str, show_less: bool, only_nouns: bool) -> list[str]:
+# get results for search text
+def get_result(search_text: str, show_less: bool) -> list[str]:
     # clean the input string
     search_text = clean_input_str(search_text)
 
     # find all possible translations
     all_results = find_all(search_text)
 
-    if show_less and only_nouns:
-        # reduce the scope of the results and filter for nouns
-       return get_nouns(reduce_results(search_text, all_results))
-    elif show_less:
+    if show_less:
         # reduce the scope of the results
         return reduce_results(search_text, all_results)
-    elif only_nouns:
-        # filter all results for nouns
-        return get_nouns(all_results)
     else:
+        # return all results
         return all_results
