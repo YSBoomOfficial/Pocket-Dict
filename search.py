@@ -19,7 +19,6 @@ def clean_input_str(text: str) -> str:
     if len(text) > 60:
         raise ValueError("Input string is too long")
 
-
     return text
 
 def find_all(search_string: str) -> list[str]:
