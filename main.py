@@ -1,11 +1,9 @@
-import clean_data as cd
-import search as sh
-import UI
-
-use_UI = True
+use_UI = False
 
 if __name__ == '__main__':
-    if use_UI:
-        UI.root.mainloop()
+    if use_UI == True:
+        import UI
+        UI.main()
     else:
-        pass
+        import CLApp
+        CLApp.main()
