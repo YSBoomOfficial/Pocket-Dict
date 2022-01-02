@@ -8,16 +8,10 @@ def clean_input_str(text: str) -> str:
     text = text.lower().strip()
     # remove extra whitespace eg: '   ' + ' '
     text = re.sub(r'\s+', ' ', text)
-    # replace non-alphanumeric characters with a single space
+    # remove non-alphanumeric characters
     text = re.sub(r'[^a-z0-9 ]', '', text)
     # remove leading and trailing whitespace that may have been the result of the string cleaning
     text = text.lower().strip()
-
-    # ensuring the input is not too long or too specific
-    # if the input is too long or specific a translation may not exist
-    # one of the longest pieces of data is around 57 characters long so 60 seemed like a good upper bound
-    if len(text) > 60:
-        raise ValueError("Input string is too long")
 
     return text
 

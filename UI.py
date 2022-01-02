@@ -46,12 +46,26 @@ def clear_handler():
 
 # tap handler for search button
 def search_handler():
+    text = field_output.get().lower().strip()
+
     # show error if field is empty
-    if field_output.get().lower().strip() == "":
+    if text == "":
         showerror(
             title='Error',
             message="No text to translate."
         )
+        field_output.set("")
+        return
+
+    # ensuring the input is not too long or too specific
+    # if the input is too long or specific a translation may not exist
+    # one of the longest pieces of data is around 57 characters long so 60 seemed like a good upper bound
+    if len(text) > 60:
+        showerror(
+            title='Error',
+            message="Search text too long."
+        )
+        field_output.set("")
         return
 
     ##### FILTER NOUN NOT WORKING #####
@@ -63,13 +77,13 @@ def search_handler():
     ##### FILTER NOUN NOT WORKING #####
     # data = sh.get_result(field_output.get().lower().strip(), __only_nouns, __show_less)
 
-    data = sh.get_result(field_output.get().lower().strip(), __show_less)
+    data = sh.get_result(text, __show_less)
 
     # show error if data returned is empty
     if data == []:
         showerror(
             title='Oops! Something went wrong',
-            message=f"No translation found for \"{field_output.get()}\".\nTry unchecking some of the checkboxes to widen the scope."
+            message=f"No translation found for \"{field_output.get()}\".\nTry unchecking the Show Fewer Translations checkbox to widen the scope."
         )
         return
     else:

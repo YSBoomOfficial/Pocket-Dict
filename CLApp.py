@@ -27,6 +27,12 @@ def main():
             field_output = input(
                 "What would you like to look up: ").lower().strip()
 
+        while len(field_output.lower().strip()) > 60:
+            field_output = ""
+            print("Search text too long.")
+            field_output = input(
+                "What would you like to look up: ").lower().strip()
+
         ##### FILTER NOUN NOT WORKING #####
         # check if user wants only nouns
         # should_show_nouns = input(
@@ -61,8 +67,10 @@ def main():
         """)
 
         # fetch results
-        data = sh.get_result(field_output,
-                            only_nouns, show_less)
+        # data = sh.get_result(field_output,
+        #                     only_nouns, show_less)
+
+        data = sh.get_result(field_output, show_less)
 
         if data == []:
             # show error if data returned is empty
@@ -81,11 +89,12 @@ def main():
                         Here are your results!
         ========================================================
         """)
-            for i in range(0, len(data)-1):
-                print(f"{i}. {data[i]}")
+            for i in range(0, len(data)):
+                print(f"{i+1}. {data[i]}")
             print("""
         ========================================================
         """)
+            print(data)
 
         # Ask user if they want to continue
         should_continue = input(
@@ -101,3 +110,6 @@ def main():
         else:
             os.system("clear")
             continue
+
+
+main()

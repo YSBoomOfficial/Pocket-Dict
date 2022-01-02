@@ -48,7 +48,7 @@ with open('datasets/eng-french.txt', 'r', encoding='utf-8') as f:
     txt_data = f.read().split('\n')
 
 
-# deal with the data in the txt file
+### deal with the data in the txt file ###
 txt_data_en = []
 txt_data_fr = []
 
@@ -69,7 +69,7 @@ csv_data = pd.read_csv("datasets/eng_-french.csv")
 csv_data = csv_data.rename(columns={'English words/sentences': 'English',
                                     'French words/sentences': 'French'})
 
-# deal with the data in the csv file
+### deal with the data in the csv file ###
 csv_data_en = []
 csv_data_fr = []
 
@@ -79,7 +79,7 @@ for i, en in enumerate(csv_data.English):
 for i, fr in enumerate(csv_data.French):
     csv_data_fr.append(clean_fr(fr).lower().strip())
 
-# combine txt and csv data
+### combine txt and csv data ###
 en_data = txt_data_en + csv_data_en
 fr_data = txt_data_fr + csv_data_fr
 
