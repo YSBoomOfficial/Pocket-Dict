@@ -6,19 +6,23 @@ import search as sh
 if __name__ == '__main__':
     os.system("pytest -v ./tests.py")
 
-
+### if this test fails then there is a huge problem ###
 def test_list_length():
     # make sure both lists are the same length
     assert len(cd.en_data) == len(cd.fr_data), "Data lists not the same length"
 
 
-def test_clean_input_str():
+def test_clean_hello():
     # make sure the string cleaning work properly
-    assert sh.clean_input_str(" * ._ hello )") == "hello", "Incorrect Output"
+    assert sh.clean_input_str("     hello     )") == "hello", "Incorrect Output"
+
+
+def test_clean_hi():
+    # make sure the string cleaning work properly
+    assert sh.clean_input_str(" * ._ hi )") == "hi", "Incorrect Output"
+
 
 # test some strings and see results
-
-
 def test_hello():
     text = " hello "
     result = sh.get_result(text, True)
