@@ -30,8 +30,11 @@ def clean_fr(text: str) -> str:
     if ' ' in text:
         text = text.replace(' ', ' ')
 
-    if '\"' in text:
-        text = text.replace('\"', '')
+    if '« ' in text:
+        text = text.replace('« ', '')
+
+    if ' »' in text:
+        text = text.replace(' »', '')
 
     if '!' in text:
         text = text.replace(' !', '')
