@@ -6,6 +6,7 @@ en_data = []
 fr_data = []
 data_dict = dict()
 
+# seperate en and fr clean functions given that French has a space before their punctuation
 def clean_en(text: str) -> str:
     if ' ' in text:
         text = text.replace(' ', ' ')
@@ -45,7 +46,7 @@ def clean_fr(text: str) -> str:
 
 
 with open('datasets/eng-french.txt', 'r', encoding='utf-8') as f:
-    txt_data = f.read().split('\n')
+    txt_data = f.read().strip().split('\n')
 
 
 ### deal with the data in the txt file ###
