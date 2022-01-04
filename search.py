@@ -1,8 +1,6 @@
 import clean_data as data
 import re
 
-all_data = data.data_dict.items()
-
 def clean_input_str(text: str) -> str:
     # remove leading and trailing whitespace
     text = text.lower().strip()
@@ -18,7 +16,7 @@ def clean_input_str(text: str) -> str:
 def find_all(search_string: str) -> list[str]:
     results = []
 
-    for key, value in all_data:
+    for key, value in data.data_dict.items():
         if search_string in key:
             for item in value:
                 results.append(item)
@@ -70,7 +68,7 @@ def reduce_results(search_string: str, data_list: list[str]) -> list[str]:
 
 
 # get results for search text
-def get_result(search_text: str, show_less: bool) -> list[str]:
+def get_result(search_text: str, show_less: bool = False) -> list[str]:
     # clean the input string
     search_text = clean_input_str(search_text)
 
