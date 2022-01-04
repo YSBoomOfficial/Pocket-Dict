@@ -7,8 +7,10 @@ def main():
 
     # Code for Command Line App
     field_output = ""
-    only_nouns = False
     show_less = False
+
+    ##### FILTER NOUN NOT WORKING #####
+    # only_nouns = False
 
     # Introduce the app
     print("""
@@ -18,15 +20,18 @@ def main():
         ========================================================
         """)
 
+    # Main Loop
     while True:
         # Get text to translate
         field_output = input("What would you like to look up: ").lower().strip()
 
+        # while field is empty, prompt the user again until they enter something
         while field_output == "":
             print("Please enter a word to translate.")
             field_output = input(
                 "What would you like to look up: ").lower().strip()
 
+        # while the input is greatr than 60 characters, prompt the user again until they enter a shorter string
         while len(field_output.lower().strip()) > 60:
             field_output = ""
             print("Search text too long.")
@@ -60,12 +65,6 @@ def main():
         # asign value to only_nouns
         show_less = True if should_show_less == "few" else False
 
-        print("""
-        ========================================================
-                        Preparing translations...
-        ========================================================
-        """)
-
         # fetch results
         # data = sh.get_result(field_output,
         #                     only_nouns, show_less)
@@ -94,7 +93,6 @@ def main():
             print("""
         ========================================================
         """)
-            print(data)
 
         # Ask user if they want to continue
         should_continue = input(
@@ -108,8 +106,6 @@ def main():
         if should_continue == "n":
             break
         else:
+            # clear terminal again
             os.system("clear")
             continue
-
-
-main()
