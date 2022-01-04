@@ -90,9 +90,6 @@ def search_handler():
         display_results(data)
 
 ### UI components ###
-# create listbox for results
-result_list = tk.Listbox(frame)
-
 # Label to introduce pocket dict
 intro_label = ttk.Label(
     frame,
@@ -109,14 +106,12 @@ field = ttk.Entry(
 )
 field.focus()
 
-
 # search button
 search_btn = ttk.Button(
     frame,
     text="Search",
 )
 search_btn.configure(command=search_handler)
-
 
 # clear button
 clear_btn = ttk.Button(
@@ -134,6 +129,9 @@ less_box = ttk.Checkbutton(
     offvalue=False,
     command=search_handler
 )
+
+# create listbox for results
+result_list = tk.Listbox(frame,width=60, height=20)
 
 ##### FILTER NOUN NOT WORKING #####
 # checkbox for only nouns
@@ -160,6 +158,5 @@ result_list.pack(**options)
 # add frame to root
 frame.pack(**options)
 
-
-# def main():
-root.mainloop()
+def main():
+    root.mainloop()
