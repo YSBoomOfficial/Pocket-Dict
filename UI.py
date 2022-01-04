@@ -7,6 +7,7 @@ import search as sh
 # init the root window and set its title
 root = tk.Tk()
 root.title("Pocket Dict")
+root.resizable(False, False)
 
 # set the frame
 frame = ttk.Frame(root)
@@ -36,7 +37,7 @@ def display_results(results: list[str]):
     result_list.delete(0, END)
 
     # add each result to the end of the listbox
-    for i in range(0, len(results)-1):
+    for i in range(0, len(results)):
         result_list.insert(END, results[i])
 
 # tap handler for clear button
